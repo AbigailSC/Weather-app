@@ -6,7 +6,7 @@ import {WiThermometer, WiSunrise, WiStrongWind, WiCloudyGusts, WiDust, WiBaromet
 export default function Ciudad(props) {
   const {ciudadId}  = useParams()
   const [infoCity, setInfoCity] = useState()
-  fetch(`https://api.openweathermap.org/data/2.5/weather?id=${ciudadId}&appid=8cb93157715b4a79403ef572875dce95`)
+  fetch(`https://api.openweathermap.org/data/2.5/weather?id=${ciudadId}&appid=REACT_APP_APIKEY`)
     .then((respuesta)=> respuesta.json())
     .then((info) => {
 		const objetoCiudad = {
