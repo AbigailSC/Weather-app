@@ -1,13 +1,13 @@
 import React, {useState} from "react";
 import { useParams } from "react-router-dom";
 import styles from './Ciudad.module.css'
-import {WiThermometer, WiSunrise, WiStrongWind, WiCloudyGusts, WiDust, WiBarometer} from 'react-icons/wi'
+import {WiThermometer, WiSunrise, WiStrongWind, WiCloudyGusts, WiDust, WiBarometer, WiHumidity} from 'react-icons/wi'
 
 export default function Ciudad(props) {
   const {ciudadId}  = useParams()
   const [infoCity, setInfoCity] = useState()
   fetch(`https://api.openweathermap.org/data/2.5/weather?id=${ciudadId}&appid=REACT_APP_APIKEY`)
-    .then((respuesta)=> respuesta.json())
+    .then((respuesta) => respuesta.json())
     .then((info) => {
 		const objetoCiudad = {
 			name: info.name,
@@ -17,6 +17,7 @@ export default function Ciudad(props) {
 			clouds: info.clouds.all,
 			latitud: info.coord.lat,
 			longitud: info.coord.lon,
+			humedad: info.main.humidity
 		}
       setInfoCity(objetoCiudad)
     })
@@ -49,6 +50,10 @@ export default function Ciudad(props) {
 					<WiBarometer className={styles.icon}/>
 					Longitud: {props.city.longitud}º
 				</div>
+				<div className={styles.bordes}>
+					<WiHumidity className={styles.icon}/>
+					Humedad: {props.city.humedad}%
+				</div>
 			</div>
 		</div>
 	)
@@ -61,8 +66,7 @@ export default function Ciudad(props) {
         <h1 className={styles.loading}> Cargando.... </h1>
       </div>
 		)		
-	}
-  else {
+	}else {
 		return (
 			<div className={styles.contenedorInfo}>
 				<h2 className={styles.titulo}>{infoCity.name}</h2>
@@ -73,6 +77,7 @@ export default function Ciudad(props) {
 					<div className={styles.noBordes}>Cantidad de nubes: {infoCity.clouds}</div>
 					<div className={styles.bordes}>Latitud: {infoCity.latitud}º</div>
 					<div className={styles.noBordes}>Longitud: {infoCity.longitud}º</div>
+					<div className={styles.bordes}>Humedad: {infoCity.main.humedad}%</div>
 				</div>
 			</div>
 		)

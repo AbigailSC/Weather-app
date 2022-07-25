@@ -5,8 +5,7 @@ import Cards from '../components/Cards/Cards.jsx';
 import Ciudad from '../components/Ciudad/Ciudad.jsx';
 import Nav from '../components/Nav/Nav.jsx';
 import {Route} from 'react-router-dom';
-
-const {REACT_APP_APIKEY} = process.env
+const REACT_APP_APIKEY = process.env
 
 function App() {
   const [cities, setCities] = useState([]); //El valor inicial de useState es un array vacio, creado del destructuring del const
@@ -31,7 +30,8 @@ function App() {
             weather: recurso.weather[0].main,
             clouds: recurso.clouds.all,
             latitud: recurso.coord.lat,
-            longitud: recurso.coord.lon
+            longitud: recurso.coord.lon,
+            humedad: recurso.main.humidity,
           };
           const ciudadEncontrada = cities.find(ciudades => ciudades.id === ciudad.id);
           if (ciudadEncontrada) return alert ("La ciudad que ya se encuentra ingresada.")
