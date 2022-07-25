@@ -4,8 +4,8 @@ import About from '../components/About/About.jsx';
 import Cards from '../components/Cards/Cards.jsx';
 import Ciudad from '../components/Ciudad/Ciudad.jsx';
 import Nav from '../components/Nav/Nav.jsx';
-import {Route} from 'react-router-dom';
-const REACT_APP_APIKEY = process.env
+import { Route } from 'react-router-dom';
+const {REACT_APP_APIKEY} = process.env
 
 function App() {
   const [cities, setCities] = useState([]); //El valor inicial de useState es un array vacio, creado del destructuring del const
@@ -33,15 +33,16 @@ function App() {
             longitud: recurso.coord.lon,
             humedad: recurso.main.humidity,
           };
+          //console.log(ciudad)
           const ciudadEncontrada = cities.find(ciudades => ciudades.id === ciudad.id);
           if (ciudadEncontrada) return alert ("La ciudad que ya se encuentra ingresada.")
           else setCities(oldCities => [...oldCities, ciudad]);
-        } else if (!ciudad){
+        }else if(!ciudad){
           alert("Debe escribir el nombre de una ciudad");
         }else {
           alert("Ciudad no encontrada");
         }
-      });
+    });
   }
   function onFilter(ciudadId) {
     let ciudad = cities.filter(c => c.id === parseInt(ciudadId));
